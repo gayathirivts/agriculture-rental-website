@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AgroRent – Card Payment</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #4D994D;
+    --dark:    #2E7D32;
+    --light:   #CFE8CF;
+    --bg:      #F5F5F5;
+    --white:   #ffffff;
+    --text:    #111827;
+    --muted:   #6B7280;
+    --border:  #e5e7eb;
+  }
+  html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+  nav {
+    position: sticky; top: 0; z-index: 999;
+    background: var(--light); height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+  .nav-logo-box { width: 30px; height: 30px; background: var(--dark); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+  .nav-logo-box svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
+  .nav-logo-text { font-size: 0.95rem; font-weight: 700; }
+
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; }
+  .nav-links a:hover { color: var(--dark); }
+
+  .nav-btns { display: flex; gap: 8px; }
+
+  .btn-register { padding: 7px 18px; border-radius: 7px; border: none; background: var(--primary); color: #fff; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: none; }
+  .btn-login { padding: 7px 18px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-size: 0.8rem; font-weight: 600; text-decoration: none; }
+
+  .page {
+    max-width: 540px; margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
+
+  .page-title {
+    font-size: 1.35rem; font-weight: 800; color: var(--text);
+    margin-bottom: 22px;
+  }
+
+  .card-illustration {
+    width: 100%; height: 190px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+    background: linear-gradient(135deg, #c8856a 0%, #b06650 35%, #8b4a3a 65%, #c8856a 100%);
+  }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block; font-size: 0.8rem; font-weight: 600;
+    color: var(--text); margin-bottom: 6px;
+  }
+
+  .form-group input {
+    width: 100%; padding: 10px 14px;
+    border: 1.5px solid var(--border); border-radius: 7px;
+    font-size: 0.875rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+  .total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .btn-pay {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 220px; height: 44px;
+    background: var(--primary); color: #fff;
+    border: none; border-radius: 6px;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-pay:hover { background: var(--dark); }
+
+  footer { background: var(--dark); padding: 44px 40px; color:white; margin-top:60px; text-align:center; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="home page.html" class="nav-logo">
+    <div class="nav-logo-box">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="9" height="7" rx="1"/></svg>
+    </div>
+    <span class="nav-logo-text">AgroRent</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="home page.html">Home</a></li>
+    <li><a href="equipment.html">Equipment Rental</a></li>
+    <li><a href="tractor.html">Tractor Booking</a></li>
+    <li><a href="machine.html">Machine Rental</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+
+  <div class="nav-btns">
+    <a href="register.html" class="btn-register">Register</a>
+    <a href="loin.html" class="btn-login">Log In</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-title">Card Payment</div>
+
+  <div class="card-illustration"></div>
+
+  <div class="form-group">
+    <label>Card Number</label>
+    <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456"/>
+  </div>
+
+  <div class="form-group">
+    <label>Name on Card</label>
+    <input type="text" id="cardName" placeholder="John Doe"/>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Expiry Date (MM/YY)</label>
+      <input type="text" id="cardExpiry" maxlength="5" placeholder="MM/YY"/>
+    </div>
+
+    <div class="form-group">
+      <label>CVV</label>
+      <input type="password" id="cardCvv" maxlength="3" placeholder="•••"/>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <div class="total-row">
+    <span>Total Amount</span>
+    <span>$450.00</span>
+  </div>
+
+  <!-- FIXED BUTTON -->
+  <button class="btn-pay" onclick="validateAndPay()">Pay Now</button>
+
+</div>
+
+<footer>
+© 2025 AgroRent. All rights reserved
+</footer>
+
+<script>
+
+function validateAndPay() {
+
+  const num = document.getElementById('cardNumber').value.replace(/\s/g,'');
+  const name = document.getElementById('cardName').value.trim();
+  const expiry = document.getElementById('cardExpiry').value.trim();
+  const cvv = document.getElementById('cardCvv').value.trim();
+
+  if (num.length < 16) {
+    alert("Please enter a valid 16-digit card number.");
+    return;
+  }
+
+  if (!name) {
+    alert("Please enter the name on your card.");
+    return;
+  }
+
+  if (expiry.length < 5) {
+    alert("Please enter expiry date MM/YY.");
+    return;
+  }
+
+  if (cvv.length < 3) {
+    alert("Please enter valid CVV.");
+    return;
+  }
+
+  alert("Payment Successful!");
+
+  setTimeout(function(){
+    window.location.href = "sucessfull.html";
+  },1200);
+
+}
+
+</script>
+
+</body>
+</html>

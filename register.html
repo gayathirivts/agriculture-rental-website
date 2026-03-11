@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AgroRent – Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary:  #4D994D;
+    --dark:     #2E7D32;
+    --light:    #CFE8CF;
+    --page-bg:  #C5D9C5;
+    --white:    #ffffff;
+    --text:     #1a1a1a;
+    --muted:    #6b7280;
+    --border:   #d1d5db;
+    --input-bg: #f9fafb;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--page-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 32px 16px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    width: 420px;
+    border-radius: 12px;
+    padding: 40px 40px 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    position: relative;
+  }
+
+  /* ── HEADER ── */
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .logo-icon {
+    width: 56px; height: 56px;
+    background: var(--dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .logo-icon svg {
+    width: 30px; height: 30px;
+    stroke: #fff; fill: none; stroke-width: 1.7;
+  }
+
+  .card-header h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .card-header p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ── FORM ── */
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="tel"],
+  .form-group input[type="password"] {
+    width: 100%;
+    height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    background: var(--input-bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input::placeholder { color: #9ca3af; }
+
+  .form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(77,153,77,0.12);
+    background: #fff;
+  }
+
+  /* typed text turns green */
+  .form-group input:not(:placeholder-shown) {
+    color: var(--primary);
+  }
+
+  /* ── RADIO GROUP ── */
+  .radio-group {
+    margin-bottom: 18px;
+  }
+
+  .radio-group > label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  .radio-option input[type="radio"] {
+    width: 16px; height: 16px;
+    accent-color: var(--primary);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .radio-option span {
+    font-size: 0.875rem;
+    color: var(--text);
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    width: 100%;
+    height: 46px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    width: 100%;
+    height: 46px;
+    background: #f3f4f6;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+  }
+  .btn-secondary:hover { background: #e5e7eb; }
+
+  /* ── FOOTER LINK ── */
+  .footer-link {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 20px;
+  }
+
+  .footer-link a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .footer-link a:hover { text-decoration: underline; }
+
+  /* ── OTP SCREEN ── */
+  #otp-screen { display: none; }
+
+  .otp-banner {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 22px;
+  }
+
+  .otp-input-wrap {
+    margin-bottom: 4px;
+  }
+
+  .otp-input-wrap input {
+    width: 100%;
+    height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    background: var(--input-bg);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    text-align: center;
+    letter-spacing: 6px;
+    font-size: 1.1rem;
+    color: var(--primary);
+  }
+
+  .otp-input-wrap input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(77,153,77,0.12);
+    background: #fff;
+  }
+
+  .otp-input-wrap input::placeholder {
+    letter-spacing: 0;
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+
+  /* ── TOAST NOTIFICATION ── */
+  #toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    z-index: 9999;
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+    opacity: 0;
+    white-space: nowrap;
+  }
+
+  #toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  #toast.success { background: var(--primary); }
+  #toast.error   { background: #dc2626; }
+
+  /* ── TRANSITIONS ── */
+  #register-form, #otp-screen {
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ── CARD HEADER (shared) ── -->
+  <div class="card-header">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="11" width="9" height="7" rx="1"/>
+        <path d="M12 14h3l2 3H3"/>
+        <circle cx="6.5" cy="18" r="1.5"/>
+        <circle cx="16.5" cy="18" r="1.5"/>
+        <path d="M9 11V8l3-1.5V11"/>
+      </svg>
+    </div>
+    <h1>Create Account</h1>
+    <p>Join AgroRent to start renting equipment</p>
+  </div>
+
+  <!-- ══════════════════════
+       PAGE 1 – REGISTER FORM
+  ══════════════════════ -->
+  <div id="register-form">
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="fullName" placeholder="Enter Your Full Name"/>
+    </div>
+
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input type="tel" id="mobile" placeholder="10-digit mobile number" maxlength="10"/>
+    </div>
+
+    <div class="radio-group">
+      <label>Register Us</label>
+      <label class="radio-option">
+        <input type="radio" name="role" value="farmer" checked/>
+        <span>Farmer &nbsp;(Need Equipment)</span>
+      </label>
+      <label class="radio-option">
+        <input type="radio" name="role" value="owner"/>
+        <span>Owner &nbsp;(Provide Equipment)</span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Create a Strong Password"/>
+    </div>
+
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Re-enter your password"/>
+    </div>
+
+    <button class="btn-primary" onclick="sendOTP()">Send OTP</button>
+
+    <div class="footer-link">
+      Already have an account? <a href="loin.html">Login here</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════
+       PAGE 2 – OTP SCREEN
+  ══════════════════════ -->
+  <div id="otp-screen">
+
+    <div class="otp-banner" id="otpBanner">
+      OTP Sent To &nbsp;<strong id="displayMobile"></strong>
+    </div>
+
+    <div class="form-group">
+      <label>Enter OTP</label>
+      <div class="otp-input-wrap">
+        <input type="tel" id="otpInput" placeholder="Enter 4 - digit OTP" maxlength="4"/>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="verifyOTP()">Verify &amp; Register</button>
+    <button class="btn-secondary" onclick="changeMobile()">Change Mobile Number</button>
+
+    <div class="footer-link">
+      Already have an account? <a href="loin.html">Login here</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast"></div>
+
+<script>
+  let generatedOTP = '';
+
+  /* ── helpers ── */
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'show ' + type;
+    setTimeout(() => { t.className = ''; }, 3000);
+  }
+
+  function validate() {
+    const name    = document.getElementById('fullName').value.trim();
+    const mobile  = document.getElementById('mobile').value.trim();
+    const pass    = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+
+    if (!name)                         { showToast('Please enter your full name.', 'error');        return false; }
+    if (!/^\d{10}$/.test(mobile))      { showToast('Enter a valid 10-digit mobile number.', 'error'); return false; }
+    if (pass.length < 6)               { showToast('Password must be at least 6 characters.', 'error'); return false; }
+    if (pass !== confirm)              { showToast('Passwords do not match.', 'error');              return false; }
+    return true;
+  }
+
+  /* ── SEND OTP ── */
+  function sendOTP() {
+    if (!validate()) return;
+
+    const mobile = document.getElementById('mobile').value.trim();
+
+    // Generate 4-digit OTP
+    generatedOTP = String(Math.floor(1000 + Math.random() * 9000));
+
+    // Update OTP banner
+    document.getElementById('displayMobile').textContent = mobile;
+    document.getElementById('otpBanner').innerHTML =
+      `OTP Sent To &nbsp;<strong>${mobile}</strong>&nbsp; and the OTP is '<strong>${generatedOTP}</strong>'`;
+
+    // Switch views
+    document.getElementById('register-form').style.display = 'none';
+    const otpScreen = document.getElementById('otp-screen');
+    otpScreen.style.display = 'block';
+    otpScreen.style.animation = 'none';
+    void otpScreen.offsetWidth; // reflow
+    otpScreen.style.animation = '';
+
+    showToast('OTP Sent Successfully ✓', 'success');
+
+    // Focus OTP input
+    setTimeout(() => document.getElementById('otpInput').focus(), 100);
+  }
+
+  /* ── VERIFY OTP ── */
+  function verifyOTP() {
+    const entered = document.getElementById('otpInput').value.trim();
+
+    if (!entered || entered.length < 4) {
+      showToast('Please enter the 4-digit OTP.', 'error');
+      return;
+    }
+
+    if (entered === generatedOTP) {
+      showToast('Verification Successful ✓', 'success');
+      setTimeout(() => {
+        window.location.href = 'home page.html';
+      }, 2000);
+    } else {
+      showToast('Invalid OTP. Please try again.', 'error');
+      document.getElementById('otpInput').value = '';
+      document.getElementById('otpInput').focus();
+    }
+  }
+
+  /* ── CHANGE MOBILE ── */
+  function changeMobile() {
+    document.getElementById('otp-screen').style.display = 'none';
+    const reg = document.getElementById('register-form');
+    reg.style.display = 'block';
+    reg.style.animation = 'none';
+    void reg.offsetWidth;
+    reg.style.animation = '';
+    document.getElementById('otpInput').value = '';
+    document.getElementById('mobile').focus();
+  }
+
+  /* ── Only allow digits in mobile & OTP fields ── */
+  document.getElementById('mobile').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  document.getElementById('otpInput').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 4);
+  });
+
+  /* ── Enter key support ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      if (document.getElementById('otp-screen').style.display === 'block') {
+        verifyOTP();
+      } else {
+        sendOTP();
+      }
+    }
+  });
+</script>
+</body>
+</html>

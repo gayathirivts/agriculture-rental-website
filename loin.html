@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AgroRent – Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary:  #4D994D;
+    --dark:     #2E7D32;
+    --light:    #CFE8CF;
+    --page-bg:  #C5D9C5;
+    --white:    #ffffff;
+    --text:     #1a1a1a;
+    --muted:    #6b7280;
+    --border:   #d1d5db;
+    --input-bg: #f9fafb;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--page-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 32px 16px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    width: 420px;
+    border-radius: 12px;
+    padding: 40px 40px 36px;
+    box-shadow: 0 4px 28px rgba(0,0,0,0.10);
+  }
+
+  /* ── HEADER ── */
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .logo-icon {
+    width: 56px; height: 56px;
+    background: var(--dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .logo-icon svg {
+    width: 30px; height: 30px;
+    stroke: #fff; fill: none; stroke-width: 1.7;
+  }
+
+  .card-header h1 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .card-header p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* ── FORM GROUPS ── */
+  .form-group {
+    margin-bottom: 18px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 7px;
+  }
+
+  .form-group input {
+    width: 100%;
+    height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    background: var(--input-bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-group input::placeholder { color: #9ca3af; }
+
+  .form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(77,153,77,0.12);
+    background: #fff;
+  }
+
+  .form-group input:not(:placeholder-shown) {
+    color: var(--primary);
+  }
+
+  /* ── FORGOT PASSWORD ── */
+  .forgot-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+    margin-bottom: 18px;
+  }
+
+  .forgot-wrap a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .forgot-wrap a:hover { color: var(--dark); text-decoration: underline; }
+
+  /* ── CUSTOM DROPDOWN ── */
+  .dropdown-group {
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .dropdown-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 7px;
+  }
+
+  .dropdown-trigger {
+    width: 100%;
+    height: 44px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    background: var(--input-bg);
+    color: #9ca3af;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    user-select: none;
+  }
+
+  .dropdown-trigger.selected { color: var(--primary); }
+
+  .dropdown-trigger:focus,
+  .dropdown-trigger.open {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(77,153,77,0.12);
+    outline: none;
+  }
+
+  .dropdown-icon {
+    width: 16px; height: 16px;
+    stroke: #9ca3af; fill: none; stroke-width: 2;
+    transition: transform 0.2s, stroke 0.2s;
+    flex-shrink: 0;
+  }
+
+  .dropdown-trigger.open .dropdown-icon,
+  .dropdown-trigger.selected .dropdown-icon {
+    stroke: var(--primary);
+  }
+
+  .dropdown-trigger.open .dropdown-icon { transform: rotate(180deg); }
+
+  /* dropdown options list */
+  .dropdown-options {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 6px;
+  }
+
+  .dropdown-options.show { display: flex; }
+
+  .dropdown-option {
+    height: 44px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .dropdown-option:last-child { margin-bottom: 0; }
+
+  .dropdown-option:hover {
+    background: var(--light);
+    color: var(--dark);
+  }
+
+  .dropdown-option.active {
+    background: var(--light);
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  /* ── LOGIN BUTTON ── */
+  .btn-login {
+    width: 100%;
+    height: 46px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-bottom: 18px;
+  }
+  .btn-login:hover  { background: var(--dark); transform: translateY(-1px); }
+  .btn-login:active { transform: translateY(0); }
+
+  /* ── FOOTER LINK ── */
+  .footer-link {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  .footer-link a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .footer-link a:hover { text-decoration: underline; }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    z-index: 9999;
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+    opacity: 0;
+    white-space: nowrap;
+  }
+  #toast.show  { transform: translateX(-50%) translateY(0); opacity: 1; }
+  #toast.error { background: #dc2626; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="card-header">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="11" width="9" height="7" rx="1"/>
+        <path d="M12 14h3l2 3H3"/>
+        <circle cx="6.5" cy="18" r="1.5"/>
+        <circle cx="16.5" cy="18" r="1.5"/>
+        <path d="M9 11V8l3-1.5V11"/>
+      </svg>
+    </div>
+    <h1>Welcome Back</h1>
+    <p>Log In To Access Your Account</p>
+  </div>
+
+  <!-- MOBILE NUMBER -->
+  <div class="form-group">
+    <label>Mobile Number</label>
+    <input type="tel" id="mobile" placeholder="Enter your mobile number" maxlength="10"/>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter Your Password"/>
+  </div>
+
+  <!-- FORGOT PASSWORD -->
+  <div class="forgot-wrap">
+    <a href="#">Forgot Password?</a>
+  </div>
+
+  <!-- ROLE DROPDOWN -->
+  <div class="dropdown-group">
+    <label>Your Role</label>
+
+    <div class="dropdown-trigger" id="dropdownTrigger" tabindex="0" onclick="toggleDropdown()">
+      <span id="dropdownLabel">select Your Role</span>
+      <svg class="dropdown-icon" viewBox="0 0 24 24">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+
+    <div class="dropdown-options" id="dropdownOptions">
+      <div class="dropdown-option" onclick="selectRole('Admin',    'admin dashboard.html')">Admin</div>
+      <div class="dropdown-option" onclick="selectRole('Farmer',   'farmar dashboard.html')">Farmer</div>
+      <div class="dropdown-option" onclick="selectRole('Owner',    'owner dashboard.html')">Owner</div>
+    </div>
+  </div>
+
+  <!-- LOGIN BUTTON -->
+  <button class="btn-login" onclick="handleLogin()">Log in</button>
+
+  <!-- FOOTER -->
+  <div class="footer-link">
+    Don't have an account? <a href="register.html">Register here</a>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+  let selectedRole    = '';
+  let selectedHref    = '';
+
+  /* ── DROPDOWN ── */
+  function toggleDropdown() {
+    const trigger = document.getElementById('dropdownTrigger');
+    const options = document.getElementById('dropdownOptions');
+    const isOpen  = options.classList.contains('show');
+
+    if (isOpen) {
+      options.classList.remove('show');
+      trigger.classList.remove('open');
+    } else {
+      options.classList.add('show');
+      trigger.classList.add('open');
+    }
+  }
+
+  function selectRole(role, href) {
+    selectedRole = role;
+    selectedHref = href;
+
+    // update label
+    document.getElementById('dropdownLabel').textContent = role;
+
+    // style trigger as selected
+    const trigger = document.getElementById('dropdownTrigger');
+    trigger.classList.remove('open');
+    trigger.classList.add('selected');
+
+    // mark active option
+    document.querySelectorAll('.dropdown-option').forEach(opt => {
+      opt.classList.toggle('active', opt.textContent.trim() === role);
+    });
+
+    // hide list
+    document.getElementById('dropdownOptions').classList.remove('show');
+  }
+
+  // close dropdown when clicking outside
+  document.addEventListener('click', function (e) {
+    const trigger = document.getElementById('dropdownTrigger');
+    const options = document.getElementById('dropdownOptions');
+    if (!trigger.contains(e.target) && !options.contains(e.target)) {
+      options.classList.remove('show');
+      if (!selectedRole) trigger.classList.remove('open');
+    }
+  });
+
+  /* ── TOAST ── */
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className   = 'show ' + type;
+    setTimeout(() => { t.className = ''; }, 3000);
+  }
+
+  /* ── LOGIN ── */
+  function handleLogin() {
+    const mobile   = document.getElementById('mobile').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!mobile || !password || !selectedRole) {
+      showToast('Please fill all required fields.', 'error');
+      return;
+    }
+
+    if (!/^\d{10}$/.test(mobile)) {
+      showToast('Enter a valid 10-digit mobile number.', 'error');
+      return;
+    }
+
+    showToast('Login Successful! Redirecting…', 'success');
+    setTimeout(() => {
+      window.location.href = selectedHref;
+    }, 1500);
+  }
+
+  /* ── Enter key ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') handleLogin();
+  });
+
+  /* ── digits only for mobile ── */
+  document.getElementById('mobile').addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 10);
+  });
+</script>
+</body>
+</html>
