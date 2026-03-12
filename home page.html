@@ -43,6 +43,7 @@
     gap: 8px;
     text-decoration: none;
     color: var(--dark);
+    flex-shrink: 0;
   }
 
   .logo-box {
@@ -66,6 +67,31 @@
     color: var(--dark);
   }
 
+  /* Hamburger — hidden on desktop */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: auto;
+    z-index: 1001;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--dark);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  /* Animate to X when open */
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .nav-links {
     display: flex;
     align-items: center;
@@ -80,7 +106,8 @@
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--dark); }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--dark); font-weight: 600; }
 
   .nav-right {
     display: flex;
@@ -129,7 +156,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-background:url('images/herosetionimage.png');
+    background: url('images/herosetionimage.png') center/cover no-repeat;
     overflow: hidden;
   }
 
@@ -187,8 +214,7 @@ background:url('images/herosetionimage.png');
   .btn-hero-white {
     background: #fff;
     color: var(--text);
-        
-    border: 2px solid  #2E7D32;;
+    border: 2px solid #2E7D32;
     padding: 12px 32px;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -198,8 +224,7 @@ background:url('images/herosetionimage.png');
     transition: background 0.2s;
     font-family: 'Inter', sans-serif;
   }
-   
-  .btn-hero-white:hover { background:   #CFE8CF; }
+  .btn-hero-white:hover { background: #CFE8CF; }
 
   /* ══════════════════════════════
      SECTION SHARED
@@ -244,10 +269,7 @@ background:url('images/herosetionimage.png');
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .why-card.boxed {
-    border: 1px solid #e5e7eb;
-    /* box-shadow: 0 2px 12px rgba(0,0,0,0.06); */
-  }
+  .why-card.boxed { border: 1px solid #e5e7eb; }
 
   .why-card:hover {
     transform: translateY(-4px);
@@ -295,7 +317,6 @@ background:url('images/herosetionimage.png');
   #services {
     background: var(--light);
     padding: 72px 40px 80px;
-  
   }
 
   #services .section-title p { color: #444; }
@@ -310,13 +331,12 @@ background:url('images/herosetionimage.png');
 
   .service-card {
     background: #fff;
-    border: 1px solid rgba(77,153,77,0.25);
+    border: 1px solid #2E7D32;
     border-radius: 16px;
     padding: 40px 28px 36px;
     text-align: center;
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     transition: transform 0.2s, box-shadow 0.2s;
-    border-color: #2E7D32;
   }
   .service-card:hover {
     transform: translateY(-5px);
@@ -457,7 +477,7 @@ background:url('images/herosetionimage.png');
     font-family: 'Inter', sans-serif;
     min-width: 160px;
   }
-  .btn-cta-white:hover { background:  #CFE8CF; }
+  .btn-cta-white:hover { background: #CFE8CF; }
 
   .btn-cta-dark {
     background: rgba(0,0,0,0.28);
@@ -571,6 +591,157 @@ background:url('images/herosetionimage.png');
     max-width: 1100px;
     margin: 0 auto;
   }
+
+  /* ══════════════════════════════════════════════════════
+     RESPONSIVE — TABLET (≤ 768px)
+  ══════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* ── Navbar ── */
+    nav {
+      height: auto;
+      padding: 12px 20px;
+      flex-wrap: wrap;
+      gap: 0;
+      position: sticky;
+    }
+
+    .hamburger { display: flex; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      width: 100%;
+      order: 3;
+      background: var(--light);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin-top: 10px;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 11px 4px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-right {
+      gap: 6px;
+    }
+    .btn-register, .btn-login {
+      padding: 7px 14px;
+      font-size: 0.8rem;
+    }
+
+    /* ── Hero ── */
+    .hero-inner { padding: 48px 20px 44px; }
+    .hero-inner h1 { font-size: 1.6rem; }
+    .hero-inner p  { font-size: 0.88rem; }
+    .btn-hero-green, .btn-hero-white {
+      padding: 10px 22px;
+      font-size: 0.85rem;
+    }
+
+    /* ── Section padding ── */
+    #why, #services, #how, #cta { padding: 48px 20px 56px; }
+
+    /* ── Section title ── */
+    .section-title { margin-bottom: 36px; }
+    .section-title h2 { font-size: 1.35rem; }
+    .section-title p  { font-size: 0.85rem; }
+
+    /* ── Why Choose Us: 2 col ── */
+    .why-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .why-card { padding: 24px 16px; }
+    .why-card.boxed { border: 1px solid #e5e7eb; }
+
+    /* ── Services: 1 col ── */
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      max-width: 480px;
+    }
+    .service-card { padding: 28px 20px 24px; }
+
+    /* ── How it works: 2 col ── */
+    .steps-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 20px;
+    }
+    .step-circle { width: 64px; height: 64px; font-size: 1.4rem; }
+
+    /* ── CTA ── */
+    #cta h2 { font-size: 1.2rem; }
+    #cta p  { font-size: 0.88rem; }
+    .btn-cta-white, .btn-cta-dark {
+      padding: 11px 28px;
+      min-width: 130px;
+      font-size: 0.85rem;
+    }
+
+    /* ── Footer ── */
+    footer { padding: 36px 20px 0; }
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding-bottom: 32px;
+    }
+    .footer-top > div:first-child {
+      grid-column: 1 / -1; /* brand spans full width */
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     RESPONSIVE — MOBILE (≤ 480px)
+  ══════════════════════════════════════════════════════ */
+  @media (max-width: 480px) {
+
+    /* ── Navbar ── */
+    nav { padding: 10px 16px; }
+    .logo-text { font-size: 0.95rem; }
+
+    /* ── Hero ── */
+    #home { min-height: 340px; }
+    .hero-inner { padding: 40px 16px 36px; }
+    .hero-inner h1 { font-size: 1.3rem; }
+    .hero-inner p  { font-size: 0.82rem; margin-bottom: 24px; }
+    .hero-btns { gap: 10px; }
+    .btn-hero-green, .btn-hero-white {
+      width: 100%;
+      padding: 11px 16px;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* ── Why Choose Us: 1 col ── */
+    .why-grid { grid-template-columns: 1fr; gap: 12px; }
+    .why-card  { padding: 20px 16px; }
+
+    /* ── Services: 1 col ── */
+    .services-grid { max-width: 100%; }
+
+    /* ── Steps: 1 col ── */
+    .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+    .step-item p { max-width: 100%; }
+
+    /* ── CTA buttons full width ── */
+    .cta-btns { flex-direction: column; align-items: center; gap: 12px; }
+    .btn-cta-white, .btn-cta-dark { width: 100%; max-width: 300px; padding: 13px 20px; }
+
+    /* ── Footer: single col ── */
+    .footer-top {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .footer-top > div:first-child { grid-column: auto; }
+    .footer-bottom { font-size: 0.75rem; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -590,8 +761,15 @@ background:url('images/herosetionimage.png');
     <span class="logo-text">AgroRent</span>
   </a>
 
-  <ul class="nav-links">
-    <li><a href="home page.html"class="active">Home</a></li>
+  <!-- Hamburger button (mobile only) -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="home page.html" class="active">Home</a></li>
     <li><a href="equipment.html">Equipment Rental</a></li>
     <li><a href="tractor.html">Tractor Booking</a></li>
     <li><a href="machine.html">Machine Rental</a></li>
@@ -600,23 +778,21 @@ background:url('images/herosetionimage.png');
   </ul>
 
   <div class="nav-right">
-    <a href="register.html"  class="btn-register">Register</a>
+    <a href="register.html" class="btn-register">Register</a>
     <a href="loin.html"     class="btn-login">Log In</a>
   </div>
 </nav>
 
 <!-- ════ HERO ════ -->
- 
 <section id="home">
- 
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <h1>Rent Agricultural Equipment Easily</h1>
     <p>Tools, tractors, and machines at affordable rates. Book online and pay only 30% advance.</p>
     <div class="hero-btns">
       <a href="equipment.html" class="btn-hero-green">Rent Equipment</a>
-      <a href="tractor.html" class="btn-hero-white">Book Tractor</a>
-      <a href="machine.html" class="btn-hero-white">Book Machine</a>
+      <a href="tractor.html"   class="btn-hero-white">Book Tractor</a>
+      <a href="machine.html"   class="btn-hero-white">Book Machine</a>
     </div>
   </div>
 </section>
@@ -688,7 +864,7 @@ background:url('images/herosetionimage.png');
       </div>
       <h3>Equipment Rental</h3>
       <p>Wide range of tools and equipment for all your farming needs.</p>
-      <a href="#" class="btn-browse">Browse Now</a>
+      <a href="equipment.html" class="btn-browse">Browse Now</a>
     </div>
 
     <div class="service-card">
@@ -702,7 +878,7 @@ background:url('images/herosetionimage.png');
       </div>
       <h3>Tractor Booking</h3>
       <p>Book tractors with experienced operators for efficient field work.</p>
-      <a href="#" class="btn-browse">Browse Now</a>
+      <a href="tractor.html" class="btn-browse">Browse Now</a>
     </div>
 
     <div class="service-card">
@@ -717,7 +893,7 @@ background:url('images/herosetionimage.png');
       </div>
       <h3>Machine Rental</h3>
       <p>Rent specialized machinery for specific agricultural tasks.</p>
-      <a href="#" class="btn-browse">Browse Now</a>
+      <a href="machine.html" class="btn-browse">Browse Now</a>
     </div>
   </div>
 </section>
@@ -758,8 +934,8 @@ background:url('images/herosetionimage.png');
   <h2>Ready to Get Started?</h2>
   <p>Join thousands of farmers who trust our equipment rental services</p>
   <div class="cta-btns">
-    <a href="register.html"    class="btn-cta-white">Register Now</a>
-    <a href="about.html" class="btn-cta-dark">Learn More</a>
+    <a href="register.html" class="btn-cta-white">Register Now</a>
+    <a href="about.html"    class="btn-cta-dark">Learn More</a>
   </div>
 </section>
 
@@ -825,6 +1001,25 @@ background:url('images/herosetionimage.png');
     © 2025 AgroRent. All rights reserved
   </div>
 </footer>
+
+<!-- ════ HAMBURGER JS ════ -->
+<script>
+  var btn   = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+
+  btn.addEventListener('click', function () {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+
+  // Close menu when any nav link is tapped
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+</script>
 
 </body>
 </html>
