@@ -19,9 +19,7 @@
   }
   html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
 
-  /* ════════════════════════
-     NAVBAR
-  ════════════════════════ */
+  /* ════ NAVBAR ════ */
   nav {
     position: sticky; top: 0; z-index: 999;
     background: var(--light); height: 52px;
@@ -29,37 +27,35 @@
     padding: 0 32px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   }
-  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); flex-shrink: 0; }
   .nav-logo-box { width: 30px; height: 30px; background: var(--dark); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
   .nav-logo-box svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
   .nav-logo-text { font-size: 0.95rem; font-weight: 700; }
+
+  /* Hamburger */
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; margin-left: auto; z-index: 1001; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .nav-links { display: flex; gap: 22px; list-style: none; }
   .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; transition: color .2s; }
   .nav-links a:hover { color: var(--dark); }
-  .btn-owner {
-    display: flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 7px; border: 1.5px solid var(--border);
-    background: var(--white); font-size: 0.8rem; font-weight: 600;
-    color: var(--text); text-decoration: none; transition: background .2s;
-  }
+
+  .btn-owner { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.8rem; font-weight: 600; color: var(--text); text-decoration: none; transition: background .2s; white-space: nowrap; }
   .btn-owner svg { width: 13px; height: 13px; stroke: var(--text); fill: none; stroke-width: 1.8; }
   .btn-owner:hover { background: #e9f5e9; }
 
-  /* ════════════════════════
-     PAGE
-  ════════════════════════ */
+  /* ════ PAGE ════ */
   .page { max-width: 980px; margin: 0 auto; padding: 24px 20px 0; }
 
-  /* ════════════════════════
-     BANNER
-  ════════════════════════ */
+  /* ════ BANNER ════ */
   .banner { background: var(--light); border-radius: 10px; padding: 28px 28px 32px; margin-bottom: 22px; }
   .banner h1 { font-size: 1.45rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
   .banner p  { font-size: 0.83rem; color: var(--dark); opacity: .75; }
 
-  /* ════════════════════════
-     STATS
-  ════════════════════════ */
+  /* ════ STATS ════ */
   .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
   .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px 18px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
   .stat-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
@@ -67,40 +63,19 @@
   .stat-head svg  { width: 16px; height: 16px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
   .stat-val { font-size: 2rem; font-weight: 700; color: var(--dark); line-height: 1; }
 
-  /* ════════════════════════
-     ADD EQUIPMENT BUTTON
-  ════════════════════════ */
-  .btn-add {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: var(--primary); color: #fff;
-    border: none; border-radius: 6px; padding: 10px 18px;
-    font-size: 0.875rem; font-weight: 600; font-family: 'Inter', sans-serif;
-    cursor: pointer; transition: background .2s, transform .15s;
-    margin-bottom: 24px;
-  }
+  /* ════ ADD BUTTON ════ */
+  .btn-add { display: inline-flex; align-items: center; gap: 7px; background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 10px 18px; font-size: 0.875rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background .2s, transform .15s; margin-bottom: 24px; }
   .btn-add:hover { background: var(--dark); transform: translateY(-1px); }
   .btn-add svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.5; }
 
-  /* ════════════════════════
-     SECTION TITLES
-  ════════════════════════ */
+  /* ════ SECTION TITLE ════ */
   .sec-title { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
 
-  /* ════════════════════════
-     EQUIPMENT GRID
-  ════════════════════════ */
+  /* ════ EQUIPMENT GRID ════ */
   .equip-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 36px; }
-
-  .equip-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 10px; overflow: hidden;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-    transition: transform .2s, box-shadow .2s;
-  }
+  .equip-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.06); transition: transform .2s, box-shadow .2s; }
   .equip-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(46,125,50,.13); }
-
-  .equip-img { width: 100%; height: 155px; object-fit: cover; display: block; background: #f3f4f6; }
-
+  .equip-img  { width: 100%; height: 155px; object-fit: cover; display: block; background: #f3f4f6; }
   .equip-body { padding: 12px 13px 14px; }
   .equip-top  { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; margin-bottom: 4px; }
   .equip-name { font-size: 0.875rem; font-weight: 700; color: var(--text); }
@@ -108,67 +83,30 @@
   .equip-owner { font-size: 0.74rem; color: var(--muted); margin-bottom: 3px; }
   .equip-price { font-size: 0.78rem; font-weight: 600; color: var(--primary); }
 
-  /* ════════════════════════
-     RECENT BOOKINGS
-  ════════════════════════ */
-  .bookings-empty {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 10px; padding: 48px 24px; text-align: center;
-    margin-bottom: 48px; box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-  }
-  .empty-icon {
-    width: 52px; height: 52px; margin: 0 auto 14px;
-    display: flex; align-items: center; justify-content: center;
-  }
+  /* ════ EMPTY BOOKINGS ════ */
+  .bookings-empty { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 48px 24px; text-align: center; margin-bottom: 48px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+  .empty-icon { width: 52px; height: 52px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; }
   .empty-icon svg { width: 40px; height: 40px; stroke: var(--muted); fill: none; stroke-width: 1.4; }
   .bookings-empty p { font-size: 0.85rem; color: var(--muted); }
 
-  /* ════════════════════════
-     MODAL OVERLAY
-  ════════════════════════ */
-  .overlay {
-    display: none;
-    position: fixed; inset: 0; z-index: 1000;
-    background: rgba(0,0,0,0.45);
-    align-items: center; justify-content: center;
-  }
+  /* ════ MODAL ════ */
+  .overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.45); align-items: center; justify-content: center; padding: 16px; }
   .overlay.open { display: flex; }
 
-  .modal {
-    background: var(--white); border-radius: 10px;
-    padding: 28px 28px 24px;
-    width: 520px; max-width: 95vw; max-height: 92vh;
-    overflow-y: auto;
-    box-shadow: 0 12px 48px rgba(0,0,0,0.22);
-    position: relative;
-    animation: popIn .22s ease;
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(.95) translateY(10px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
-  }
+  .modal { background: var(--white); border-radius: 10px; padding: 28px 28px 24px; width: 520px; max-width: 100%; max-height: 92vh; overflow-y: auto; box-shadow: 0 12px 48px rgba(0,0,0,0.22); position: relative; animation: popIn .22s ease; }
+  @keyframes popIn { from { opacity: 0; transform: scale(.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
   .modal-head { margin-bottom: 20px; padding-right: 28px; }
   .modal-head h2 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
   .modal-head p  { font-size: 0.8rem; color: var(--muted); }
 
-  .modal-close {
-    position: absolute; top: 18px; right: 18px;
-    width: 28px; height: 28px; border: none; background: transparent;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    border-radius: 6px; transition: background .15s; color: var(--muted);
-    font-size: 1.2rem; font-weight: 300; line-height: 1;
-  }
+  .modal-close { position: absolute; top: 18px; right: 18px; width: 28px; height: 28px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 6px; transition: background .15s; color: var(--muted); font-size: 1.2rem; font-weight: 300; line-height: 1; }
   .modal-close:hover { background: #f3f4f6; color: var(--text); }
 
-  /* ─ Form fields ─ */
   .form-group { margin-bottom: 16px; }
   .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
 
-  .form-group label, .form-row .form-group label {
-    display: block; font-size: 0.8rem; font-weight: 600;
-    color: var(--text); margin-bottom: 6px;
-  }
+  .form-group label, .form-row .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
 
   .form-group input,
   .form-group textarea,
@@ -177,34 +115,20 @@
     border: 1px solid var(--border); border-radius: 6px;
     font-size: 0.875rem; font-family: 'Inter', sans-serif;
     background: #f9fafb; color: var(--text); outline: none;
-    transition: border-color .2s, box-shadow .2s;
-    resize: none;
+    transition: border-color .2s, box-shadow .2s; resize: none;
   }
-  .form-group input       { height: 40px; }
-  .form-group textarea    { height: 90px; }
-  .form-group select      { height: 40px; cursor: pointer; }
+  .form-group input    { height: 40px; }
+  .form-group textarea { height: 90px; }
+  .form-group select   { height: 40px; cursor: pointer; }
 
   .form-group input:focus,
   .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(77,153,77,0.12);
-    background: #fff;
-  }
+  .form-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(77,153,77,0.12); background: #fff; }
 
-  .btn-submit {
-    width: 100%; height: 44px;
-    background: var(--primary); color: #fff;
-    border: none; border-radius: 6px;
-    font-size: 0.9rem; font-weight: 600; font-family: 'Inter', sans-serif;
-    cursor: pointer; transition: background .2s;
-    margin-top: 4px;
-  }
+  .btn-submit { width: 100%; height: 44px; background: var(--primary); color: #fff; border: none; border-radius: 6px; font-size: 0.9rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; transition: background .2s; margin-top: 4px; }
   .btn-submit:hover { background: var(--dark); }
 
-  /* ════════════════════════
-     FOOTER
-  ════════════════════════ */
+  /* ════ FOOTER ════ */
   footer { background: var(--dark); padding: 44px 32px 0; }
   .footer-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 40px; }
   .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
@@ -219,26 +143,115 @@
   .contact-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 0.82rem; color: rgba(255,255,255,.75); }
   .contact-row svg { width: 14px; height: 14px; stroke: rgba(255,255,255,.65); fill: none; stroke-width: 1.8; flex-shrink: 0; margin-top: 2px; }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,.14); max-width: 980px; margin: 0 auto; padding: 16px 0; font-size: 0.78rem; color: rgba(255,255,255,.45); }
+
+  /* ══════════════════════════════════════
+     TABLET  ≤ 768px
+  ══════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* Navbar */
+    nav { height: auto; padding: 12px 20px; flex-wrap: wrap; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; gap: 0; width: 100%; order: 3; background: var(--light); border-top: 1px solid rgba(0,0,0,0.07); margin-top: 10px; }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a  { display: block; padding: 11px 4px; font-size: 0.88rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+
+    /* Page */
+    .page { padding: 18px 16px 0; }
+
+    /* Banner */
+    .banner { padding: 22px 20px 26px; }
+    .banner h1 { font-size: 1.2rem; }
+
+    /* Stats → stays 3-col, compact */
+    .stats { gap: 10px; margin-bottom: 16px; }
+    .stat-card { padding: 13px 13px 15px; }
+    .stat-val  { font-size: 1.7rem; }
+
+    /* Equipment → 2 col */
+    .equip-grid { grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .equip-img  { height: 130px; }
+
+    /* Modal form row → stack on tablet too */
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+
+    /* Footer */
+    footer { padding: 32px 20px 0; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 28px; }
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
+  }
+
+  /* ══════════════════════════════════════
+     MOBILE  ≤ 480px
+  ══════════════════════════════════════ */
+  @media (max-width: 480px) {
+
+    /* Navbar */
+    nav { padding: 10px 16px; }
+    .nav-logo-text { font-size: 0.9rem; }
+    .btn-owner { padding: 5px 10px; font-size: 0.72rem; }
+
+    /* Page */
+    .page { padding: 14px 12px 0; }
+
+    /* Banner */
+    .banner { padding: 16px 14px 20px; border-radius: 8px; }
+    .banner h1 { font-size: 1.1rem; }
+    .banner p  { font-size: 0.78rem; }
+
+    /* Stats → 1 col horizontal */
+    .stats { grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+    .stat-card { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; }
+    .stat-head { margin-bottom: 0; flex: 1; }
+    .stat-val  { font-size: 1.8rem; }
+
+    /* Add button → full width */
+    .btn-add { width: 100%; justify-content: center; margin-bottom: 20px; }
+
+    /* Equipment → 1 col */
+    .equip-grid { grid-template-columns: 1fr; gap: 12px; }
+    .equip-img  { height: 170px; }
+
+    /* Modal → full width, more padding room */
+    .modal { padding: 22px 18px 20px; border-radius: 8px; }
+    .modal-head h2 { font-size: 0.95rem; }
+    .modal-head p  { font-size: 0.76rem; }
+
+    /* Bookings empty */
+    .bookings-empty { padding: 36px 16px 28px; margin-bottom: 32px; }
+
+    /* Footer → 1 col */
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .footer-grid > div:first-child { grid-column: auto; }
+    .footer-bottom { text-align: center; font-size: 0.72rem; }
+  }
 </style>
 </head>
 <body>
 
 <!-- ════ NAVBAR ════ -->
 <nav>
-  <a href="home.html" class="nav-logo">
+  <a href="home page.html" class="nav-logo">
     <div class="nav-logo-box">
       <svg viewBox="0 0 24 24"><rect x="3" y="11" width="9" height="7" rx="1"/><path d="M12 14h3l2 3H3"/><circle cx="6.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/><path d="M9 11V8l3-1.5V11"/></svg>
     </div>
     <span class="nav-logo-text">AgroRent</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="home.html">Home</a></li>
-    <li><a href="home.html#services">Equipment Rental</a></li>
-    <li><a href="home.html#services">Tractor Booking</a></li>
-    <li><a href="home.html#services">Machine Rental</a></li>
-    <li><a href="home.html#cta">About Us</a></li>
-    <li><a href="home.html#footer">Contact Us</a></li>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="home page.html">Home</a></li>
+    <li><a href="equipment.html">Equipment Rental</a></li>
+    <li><a href="tractor.html">Tractor Booking</a></li>
+    <li><a href="machine.html">Machine Rental</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
   </ul>
+
   <a href="#" class="btn-owner">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
     John Farm Service
@@ -293,10 +306,7 @@
     <div class="equip-card">
       <img class="equip-img" src="images/pannaiarival.jpg" alt="Hand Sickle"/>
       <div class="equip-body">
-        <div class="equip-top">
-          <span class="equip-name">Hand Sickle</span>
-          <span class="badge-avail">available</span>
-        </div>
+        <div class="equip-top"><span class="equip-name">Hand Sickle</span><span class="badge-avail">available</span></div>
         <div class="equip-owner">Owner: John Farm Services</div>
         <div class="equip-price">₹50 / day</div>
       </div>
@@ -305,10 +315,7 @@
     <div class="equip-card">
       <img class="equip-img" src="images/blue tractor.jpg" alt="Tractor"/>
       <div class="equip-body">
-        <div class="equip-top">
-          <span class="equip-name">Tractor</span>
-          <span class="badge-avail">available</span>
-        </div>
+        <div class="equip-top"><span class="equip-name">Tractor</span><span class="badge-avail">available</span></div>
         <div class="equip-owner">Owner: John Farm Services</div>
         <div class="equip-price">₹1500 / acre</div>
       </div>
@@ -317,10 +324,7 @@
     <div class="equip-card">
       <img class="equip-img" src="images/mixcer machine.jpg" alt="Corn Hammer Machine"/>
       <div class="equip-body">
-        <div class="equip-top">
-          <span class="equip-name">Corn Hammer Machine</span>
-          <span class="badge-avail">available</span>
-        </div>
+        <div class="equip-top"><span class="equip-name">Corn Hammer Machine</span><span class="badge-avail">available</span></div>
         <div class="equip-owner">Owner: John Farm Services</div>
         <div class="equip-price">₹2000 / Hour</div>
       </div>
@@ -329,10 +333,7 @@
     <div class="equip-card">
       <img class="equip-img" src="images/sethikki.jpg" alt="Weeding Stick"/>
       <div class="equip-body">
-        <div class="equip-top">
-          <span class="equip-name">Weeding Stick</span>
-          <span class="badge-avail">available</span>
-        </div>
+        <div class="equip-top"><span class="equip-name">Weeding Stick</span><span class="badge-avail">available</span></div>
         <div class="equip-owner">Owner: John Farm Services</div>
         <div class="equip-price">₹50 / day</div>
       </div>
@@ -341,10 +342,7 @@
     <div class="equip-card">
       <img class="equip-img" src="images/fertilizer sprary machine.jpg" alt="Agricultural Sprayer"/>
       <div class="equip-body">
-        <div class="equip-top">
-          <span class="equip-name">Agricultural Sprayer</span>
-          <span class="badge-avail">available</span>
-        </div>
+        <div class="equip-top"><span class="equip-name">Agricultural Sprayer</span><span class="badge-avail">available</span></div>
         <div class="equip-owner">Owner: John Farm Services</div>
         <div class="equip-price">₹50 / liter</div>
       </div>
@@ -353,10 +351,7 @@
     <div class="equip-card">
       <img class="equip-img" src="images/paparakathi.jpg" alt="Pruning Knife"/>
       <div class="equip-body">
-        <div class="equip-top">
-          <span class="equip-name">Pruning Knife</span>
-          <span class="badge-avail">available</span>
-        </div>
+        <div class="equip-top"><span class="equip-name">Pruning Knife</span><span class="badge-avail">available</span></div>
         <div class="equip-owner">Owner: John Farm Services</div>
         <div class="equip-price">₹50 / day</div>
       </div>
@@ -368,19 +363,14 @@
   <div class="sec-title">Recent Bookings</div>
   <div class="bookings-empty">
     <div class="empty-icon">
-      <svg viewBox="0 0 24 24">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-        <line x1="9" y1="13" x2="15" y2="13"/>
-        <line x1="9" y1="17" x2="12" y2="17"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
     </div>
     <p>No Bookings Yet</p>
   </div>
 
 </div><!-- /page -->
 
-<!-- ════ MODAL OVERLAY ════ -->
+<!-- ════ MODAL ════ -->
 <div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
   <div class="modal" id="modal">
 
@@ -393,19 +383,19 @@
 
     <div class="form-group">
       <label>Equipment Name</label>
-      <input type="text" id="equipName" placeholder=""/>
+      <input type="text" id="equipName" placeholder="e.g. Hand Sickle"/>
     </div>
 
     <div class="form-group">
       <label>Description</label>
-      <textarea id="equipDesc" placeholder=""></textarea>
+      <textarea id="equipDesc" placeholder="Describe the equipment..."></textarea>
     </div>
 
     <div class="form-row">
       <div class="form-group">
         <label>Type</label>
         <select id="equipType">
-          <option value="" disabled selected></option>
+          <option value="" disabled selected>Select type</option>
           <option value="Equipment">Equipment</option>
           <option value="Tractor">Tractor</option>
           <option value="Machine">Machine</option>
@@ -414,7 +404,7 @@
       <div class="form-group">
         <label>Rate Type</label>
         <select id="equipRateType">
-          <option value="" disabled selected></option>
+          <option value="" disabled selected>Select rate</option>
           <option value="Per Acre">Per Acre</option>
           <option value="Per Hour">Per Hour</option>
           <option value="Per Day">Per Day</option>
@@ -423,12 +413,11 @@
     </div>
 
     <div class="form-group">
-      <label>Rate ($)</label>
-      <input type="number" id="equipRate" placeholder="" min="0"/>
+      <label>Rate (₹)</label>
+      <input type="number" id="equipRate" placeholder="e.g. 500" min="0"/>
     </div>
 
     <button class="btn-submit" onclick="submitEquipment()">Add Equipment</button>
-
   </div>
 </div>
 
@@ -471,7 +460,23 @@
   <div class="footer-bottom">© 2025 AgroRent. All rights reserved</div>
 </footer>
 
+<!-- ════ JS ════ -->
 <script>
+  /* ── Hamburger ── */
+  var btn   = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+  btn.addEventListener('click', function () {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+
+  /* ── Modal ── */
   function openModal() {
     document.getElementById('overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -487,11 +492,11 @@
   }
 
   function submitEquipment() {
-    const name     = document.getElementById('equipName').value.trim();
-    const desc     = document.getElementById('equipDesc').value.trim();
-    const type     = document.getElementById('equipType').value;
-    const rateType = document.getElementById('equipRateType').value;
-    const rate     = document.getElementById('equipRate').value;
+    var name     = document.getElementById('equipName').value.trim();
+    var desc     = document.getElementById('equipDesc').value.trim();
+    var type     = document.getElementById('equipType').value;
+    var rateType = document.getElementById('equipRateType').value;
+    var rate     = document.getElementById('equipRate').value;
 
     if (!name || !desc || !type || !rateType || !rate) {
       alert('Please fill in all fields.');
@@ -501,7 +506,6 @@
     alert('Equipment Added Successfully');
     closeModal();
 
-    // Reset form
     document.getElementById('equipName').value     = '';
     document.getElementById('equipDesc').value     = '';
     document.getElementById('equipType').value     = '';
@@ -509,8 +513,7 @@
     document.getElementById('equipRate').value     = '';
   }
 
-  // Close on Escape key
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeModal();
   });
 </script>
