@@ -19,9 +19,7 @@
   }
   html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
 
-  /* ════════════════════════════
-     NAVBAR
-  ════════════════════════════ */
+  /* ════ NAVBAR ════ */
   nav {
     position: sticky; top: 0; z-index: 999;
     background: var(--light); height: 52px;
@@ -29,32 +27,35 @@
     padding: 0 32px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   }
-  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); flex-shrink: 0; }
   .nav-logo-box { width: 30px; height: 30px; background: var(--dark); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
   .nav-logo-box svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
   .nav-logo-text { font-size: 0.95rem; font-weight: 700; }
+
+  /* Hamburger */
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; margin-left: auto; z-index: 1001; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .nav-links { display: flex; gap: 22px; list-style: none; }
   .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; transition: color .2s; }
   .nav-links a:hover { color: var(--dark); }
-  .btn-admin { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.8rem; font-weight: 600; color: var(--text); cursor: pointer; text-decoration: none; transition: background .2s; }
+
+  .btn-admin { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.8rem; font-weight: 600; color: var(--text); cursor: pointer; text-decoration: none; transition: background .2s; white-space: nowrap; }
   .btn-admin svg { width: 13px; height: 13px; stroke: var(--text); fill: none; stroke-width: 1.8; }
   .btn-admin:hover { background: #e9f5e9; }
 
-  /* ════════════════════════════
-     PAGE WRAPPER
-  ════════════════════════════ */
+  /* ════ PAGE WRAPPER ════ */
   .page { max-width: 980px; margin: 0 auto; padding: 24px 20px 0; }
 
-  /* ════════════════════════════
-     BANNER
-  ════════════════════════════ */
+  /* ════ BANNER ════ */
   .banner { background: var(--light); border-radius: 10px; padding: 28px 28px 32px; margin-bottom: 22px; }
   .banner h1 { font-size: 1.45rem; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
   .banner p  { font-size: 0.83rem; color: var(--dark); opacity: .75; }
 
-  /* ════════════════════════════
-     STATS
-  ════════════════════════════ */
+  /* ════ STATS ════ */
   .stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 22px; }
   .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px 16px 18px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
   .stat-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -63,17 +64,9 @@
   .stat-val { font-size: 1.9rem; font-weight: 700; color: var(--dark); line-height: 1; }
   .stat-sub { font-size: 0.7rem; color: var(--muted); margin-top: 5px; }
 
-  /* ════════════════════════════
-     CSS-ONLY TAB SYSTEM
-     Using hidden radio inputs + labels
-  ════════════════════════════ */
+  /* ════ CSS-ONLY TABS ════ */
+  #tab-users, #tab-equipment, #tab-bookings { display: none; }
 
-  /* Hide the actual radio inputs */
-  #tab-users,
-  #tab-equipment,
-  #tab-bookings { display: none; }
-
-  /* Tab bar */
   .tab-bar {
     display: inline-flex;
     background: var(--white);
@@ -81,80 +74,49 @@
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 24px;
+    flex-wrap: wrap;
   }
 
   .tab-label {
     padding: 9px 30px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--muted);
-    cursor: pointer;
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--muted); cursor: pointer;
     transition: background .2s, color .2s;
     user-select: none;
   }
   .tab-label:hover { background: var(--light); color: var(--dark); }
 
-  /* Active tab styles — triggered by checked radio */
   #tab-users:checked     ~ .page .tab-bar label[for="tab-users"],
   #tab-equipment:checked ~ .page .tab-bar label[for="tab-equipment"],
   #tab-bookings:checked  ~ .page .tab-bar label[for="tab-bookings"] {
-    background: var(--dark);
-    color: #fff;
+    background: var(--dark); color: #fff;
   }
 
-  /* Hide all panels by default */
   .tab-panel { display: none; }
-
-  /* Show the correct panel when its radio is checked */
   #tab-users:checked     ~ .page .panel-users     { display: block; }
   #tab-equipment:checked ~ .page .panel-equipment { display: block; }
   #tab-bookings:checked  ~ .page .panel-bookings  { display: block; }
 
-  /* ════════════════════════════
-     SECTION TITLE
-  ════════════════════════════ */
+  /* ════ SECTION TITLE ════ */
   .sec-title { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
 
-  /* ════════════════════════════
-     USERS PANEL
-  ════════════════════════════ */
+  /* ════ USERS PANEL ════ */
   .group-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
   .user-group  { margin-bottom: 20px; }
-
-  .user-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 8px; padding: 13px 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 8px;
-    transition: box-shadow .2s;
-  }
+  .user-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; transition: box-shadow .2s; }
   .user-card:hover { box-shadow: 0 4px 14px rgba(46,125,50,.10); }
   .user-name  { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   .user-phone { font-size: 0.78rem; color: var(--muted); }
-
   .badge { padding: 4px 13px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
   .badge-farmer { background: #e8f5e9; color: var(--dark); }
   .badge-owner  { background: #eef2ff; color: #4338ca; }
 
-  /* ════════════════════════════
-     EQUIPMENT PANEL
-  ════════════════════════════ */
-  .equip-grid {
-    display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
-    margin-bottom: 40px;
-  }
-
-  .equip-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 10px; overflow: hidden;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-    transition: transform .2s, box-shadow .2s;
-  }
+  /* ════ EQUIPMENT PANEL ════ */
+  .equip-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 40px; }
+  .equip-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,0.06); transition: transform .2s, box-shadow .2s; }
   .equip-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px rgba(46,125,50,.13); }
-
   .equip-img-wrap { width: 100%; height: 160px; overflow: hidden; background: #f3f4f6; }
   .equip-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
   .equip-body { padding: 13px 14px 15px; }
   .equip-top  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
   .equip-name { font-size: 0.88rem; font-weight: 700; color: var(--text); }
@@ -162,31 +124,19 @@
   .equip-owner { font-size: 0.75rem; color: var(--muted); margin-bottom: 3px; }
   .equip-price { font-size: 0.78rem; font-weight: 600; color: var(--primary); }
 
-  /* ════════════════════════════
-     BOOKINGS PANEL
-  ════════════════════════════ */
+  /* ════ BOOKINGS PANEL ════ */
   .booking-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 24px; }
   .bstat { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; }
   .bstat-label { font-size: 0.72rem; font-weight: 500; color: var(--muted); margin-bottom: 8px; }
   .bstat-val   { font-size: 1.6rem; font-weight: 700; color: var(--dark); }
 
-  .empty-state {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 10px; padding: 56px 24px; text-align: center;
-    margin-bottom: 40px;
-  }
-  .empty-icon {
-    width: 60px; height: 60px; background: var(--light);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-  }
+  .empty-state { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 56px 24px; text-align: center; margin-bottom: 40px; }
+  .empty-icon  { width: 60px; height: 60px; background: var(--light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
   .empty-icon svg { width: 26px; height: 26px; stroke: var(--dark); fill: none; stroke-width: 1.7; }
   .empty-state h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
   .empty-state p  { font-size: 0.82rem; color: var(--muted); }
 
-  /* ════════════════════════════
-     FOOTER
-  ════════════════════════════ */
+  /* ════ FOOTER ════ */
   footer { background: var(--dark); padding: 44px 32px 0; margin-top: 48px; }
   .footer-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 40px; }
   .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
@@ -201,6 +151,90 @@
   .contact-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 0.82rem; color: rgba(255,255,255,.75); }
   .contact-row svg { width: 14px; height: 14px; stroke: rgba(255,255,255,.65); fill: none; stroke-width: 1.8; flex-shrink: 0; margin-top: 2px; }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,.14); max-width: 980px; margin: 0 auto; padding: 16px 0; font-size: 0.78rem; color: rgba(255,255,255,.45); }
+
+  /* ══════════════════════════════════════
+     TABLET  ≤ 768px
+  ══════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* Navbar */
+    nav { height: auto; padding: 12px 20px; flex-wrap: wrap; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; gap: 0; width: 100%; order: 3; background: var(--light); border-top: 1px solid rgba(0,0,0,0.07); margin-top: 10px; }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a  { display: block; padding: 11px 4px; font-size: 0.88rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+
+    /* Page */
+    .page { padding: 18px 16px 0; }
+
+    /* Banner */
+    .banner { padding: 20px 18px 24px; }
+    .banner h1 { font-size: 1.2rem; }
+
+    /* Stats → 2 col */
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    /* Tab bar → full width */
+    .tab-bar { display: flex; width: 100%; }
+    .tab-label { flex: 1; text-align: center; padding: 9px 12px; font-size: 0.78rem; }
+
+    /* Equipment → 2 col */
+    .equip-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .equip-img-wrap { height: 130px; }
+
+    /* Booking stats → keep 3 but smaller */
+    .booking-stats { gap: 10px; }
+    .bstat { padding: 14px 10px; }
+    .bstat-val { font-size: 1.3rem; }
+
+    /* Footer */
+    footer { padding: 32px 20px 0; margin-top: 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 28px; }
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
+  }
+
+  /* ══════════════════════════════════════
+     MOBILE  ≤ 480px
+  ══════════════════════════════════════ */
+  @media (max-width: 480px) {
+
+    /* Navbar */
+    nav { padding: 10px 16px; }
+    .nav-logo-text { font-size: 0.9rem; }
+    .btn-admin { padding: 5px 10px; font-size: 0.75rem; }
+
+    /* Page */
+    .page { padding: 14px 12px 0; }
+
+    /* Banner */
+    .banner { padding: 16px 14px 20px; border-radius: 8px; }
+    .banner h1 { font-size: 1.05rem; }
+    .banner p  { font-size: 0.78rem; }
+
+    /* Stats → 2 col (stays 2 col, just smaller) */
+    .stats { gap: 10px; margin-bottom: 16px; }
+    .stat-val { font-size: 1.5rem; }
+
+    /* Tab labels even smaller */
+    .tab-label { padding: 8px 6px; font-size: 0.74rem; }
+
+    /* Equipment → 1 col */
+    .equip-grid { grid-template-columns: 1fr; gap: 12px; }
+    .equip-img-wrap { height: 170px; }
+
+    /* Users */
+    .user-card { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .badge { align-self: flex-start; }
+
+    /* Booking stats → 1 col */
+    .booking-stats { grid-template-columns: 1fr; gap: 10px; }
+
+    /* Footer → 1 col */
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .footer-grid > div:first-child { grid-column: auto; }
+    .footer-bottom { text-align: center; font-size: 0.72rem; }
+  }
 </style>
 </head>
 <body>
@@ -218,14 +252,20 @@
     </div>
     <span class="nav-logo-text">AgroRent</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="home.html">Home</a></li>
-    <li><a href="home.html#services">Equipment Rental</a></li>
-    <li><a href="home.html#services">Tractor Booking</a></li>
-    <li><a href="home.html#services">Machine Rental</a></li>
-    <li><a href="home.html#cta">About Us</a></li>
-    <li><a href="home.html#footer">Contact Us</a></li>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="home page.html">Home</a></li>
+    <li><a href="equipment.html">Equipment Rental</a></li>
+    <li><a href="tractor.html">Tractor Booking</a></li>
+    <li><a href="machine.html">Machine Rental</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
   </ul>
+
   <a href="#" class="btn-admin">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
     Admin
@@ -238,7 +278,7 @@
   <!-- BANNER -->
   <div class="banner">
     <h1>Admin Dashboard</h1>
-    <p>Mentor And Manage the Entire Platform</p>
+    <p>Monitor And Manage the Entire Platform</p>
   </div>
 
   <!-- STATS -->
@@ -324,84 +364,54 @@
     <div class="equip-grid">
 
       <div class="equip-card">
-        <div class="equip-img-wrap">
-          <img src="images/pannaiarival.jpg" alt="Hand Sickle"/>
-        </div>
+        <div class="equip-img-wrap"><img src="images/pannaiarival.jpg" alt="Hand Sickle"/></div>
         <div class="equip-body">
-          <div class="equip-top">
-            <span class="equip-name">Hand Sickle</span>
-            <span class="badge-avail">available</span>
-          </div>
+          <div class="equip-top"><span class="equip-name">Hand Sickle</span><span class="badge-avail">available</span></div>
           <div class="equip-owner">Owner: John Farm Services</div>
           <div class="equip-price">₹50 / day</div>
         </div>
       </div>
 
       <div class="equip-card">
-        <div class="equip-img-wrap">
-          <img src="images/blue tractor.jpg" alt="Tractor"/>
-        </div>
+        <div class="equip-img-wrap"><img src="images/blue tractor.jpg" alt="Tractor"/></div>
         <div class="equip-body">
-          <div class="equip-top">
-            <span class="equip-name">Tractor</span>
-            <span class="badge-avail">available</span>
-          </div>
+          <div class="equip-top"><span class="equip-name">Tractor</span><span class="badge-avail">available</span></div>
           <div class="equip-owner">Owner: John Farm Services</div>
           <div class="equip-price">₹1500 / acre</div>
         </div>
       </div>
 
       <div class="equip-card">
-        <div class="equip-img-wrap">
-          <img src="images/mixcer machine.jpg" alt="Corn Hammer Machine"/>
-        </div>
+        <div class="equip-img-wrap"><img src="images/mixcer machine.jpg" alt="Corn Hammer Machine"/></div>
         <div class="equip-body">
-          <div class="equip-top">
-            <span class="equip-name">Corn Hammer Machine</span>
-            <span class="badge-avail">available</span>
-          </div>
+          <div class="equip-top"><span class="equip-name">Corn Hammer Machine</span><span class="badge-avail">available</span></div>
           <div class="equip-owner">Owner: John Farm Services</div>
           <div class="equip-price">₹2000 / Hour</div>
         </div>
       </div>
 
       <div class="equip-card">
-        <div class="equip-img-wrap">
-          <img src="images/sethikki.jpg" alt="Weeding Stick"/>
-        </div>
+        <div class="equip-img-wrap"><img src="images/sethikki.jpg" alt="Weeding Stick"/></div>
         <div class="equip-body">
-          <div class="equip-top">
-            <span class="equip-name">Weeding Stick</span>
-            <span class="badge-avail">available</span>
-          </div>
+          <div class="equip-top"><span class="equip-name">Weeding Stick</span><span class="badge-avail">available</span></div>
           <div class="equip-owner">Owner: John Farm Services</div>
           <div class="equip-price">₹50 / day</div>
         </div>
       </div>
 
       <div class="equip-card">
-        <div class="equip-img-wrap">
-          <img src="images/fertilizer sprary machine.jpg" alt="Agricultural Sprayer"/>
-        </div>
+        <div class="equip-img-wrap"><img src="images/fertilizer sprary machine.jpg" alt="Agricultural Sprayer"/></div>
         <div class="equip-body">
-          <div class="equip-top">
-            <span class="equip-name">Agricultural Sprayer</span>
-            <span class="badge-avail">available</span>
-          </div>
+          <div class="equip-top"><span class="equip-name">Agricultural Sprayer</span><span class="badge-avail">available</span></div>
           <div class="equip-owner">Owner: John Farm Services</div>
           <div class="equip-price">₹50 / liter</div>
         </div>
       </div>
 
       <div class="equip-card">
-        <div class="equip-img-wrap">
-          <img src="images/paparakathi.jpg" alt="Pruning Knife"/>
-        </div>
+        <div class="equip-img-wrap"><img src="images/paparakathi.jpg" alt="Pruning Knife"/></div>
         <div class="equip-body">
-          <div class="equip-top">
-            <span class="equip-name">Pruning Knife</span>
-            <span class="badge-avail">available</span>
-          </div>
+          <div class="equip-top"><span class="equip-name">Pruning Knife</span><span class="badge-avail">available</span></div>
           <div class="equip-owner">Owner: John Farm Services</div>
           <div class="equip-price">₹50 / day</div>
         </div>
@@ -415,18 +425,9 @@
     <div class="sec-title">Booking Overview</div>
 
     <div class="booking-stats">
-      <div class="bstat">
-        <div class="bstat-label">Total Bookings</div>
-        <div class="bstat-val">0</div>
-      </div>
-      <div class="bstat">
-        <div class="bstat-label">Active Bookings</div>
-        <div class="bstat-val">0</div>
-      </div>
-      <div class="bstat">
-        <div class="bstat-label">Completed</div>
-        <div class="bstat-val">0</div>
-      </div>
+      <div class="bstat"><div class="bstat-label">Total Bookings</div><div class="bstat-val">0</div></div>
+      <div class="bstat"><div class="bstat-label">Active Bookings</div><div class="bstat-val">0</div></div>
+      <div class="bstat"><div class="bstat-label">Completed</div><div class="bstat-val">0</div></div>
     </div>
 
     <div class="empty-state">
@@ -470,26 +471,30 @@
     </div>
     <div class="footer-col">
       <h4>Contact Info</h4>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
-        +91 98765 43210
-      </div>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>
-        WhatsApp Support
-      </div>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        info@agrorent.com
-      </div>
-      <div class="contact-row">
-        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Rural Development Center
-      </div>
+      <div class="contact-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>+91 98765 43210</div>
+      <div class="contact-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 21.73 16l.19.92z"/></svg>WhatsApp Support</div>
+      <div class="contact-row"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@agrorent.com</div>
+      <div class="contact-row"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rural Development Center</div>
     </div>
   </div>
   <div class="footer-bottom">© 2025 AgroRent. All rights reserved</div>
 </footer>
+
+<!-- ════ HAMBURGER JS ════ -->
+<script>
+  var btn   = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+  btn.addEventListener('click', function () {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+</script>
 
 </body>
 </html>
