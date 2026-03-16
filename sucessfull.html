@@ -19,149 +19,156 @@
   }
   html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  /* ════════════════════════
-     NAVBAR
-  ════════════════════════ */
-   nav {
+  /* ════ NAVBAR ════ */
+  nav {
     position: sticky; top: 0; z-index: 999;
     background: var(--light); height: 52px;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 40px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   }
-  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); flex-shrink: 0; }
   .nav-logo-box { width: 30px; height: 30px; background: var(--dark); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
   .nav-logo-box svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
   .nav-logo-text { font-size: 0.95rem; font-weight: 700; }
 
+  /* Hamburger */
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; margin-left: auto; z-index: 1001; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .nav-links { display: flex; gap: 24px; list-style: none; }
-  .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; transition: color .2s; position: relative; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; transition: color .2s; }
   .nav-links a:hover { color: var(--dark); }
-  .nav-links a.active { color: var(--dark); font-weight: 600; }
-  .nav-links a.active::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 100%; height: 2px; background: var(--dark); border-radius: 2px; }
 
   .nav-btns { display: flex; gap: 8px; }
-  .btn-register {
-    padding: 7px 18px; border-radius: 7px; border: none;
-    background: var(--primary); color: #fff; font-size: 0.8rem; font-weight: 600;
-    font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none;
-    transition: background .2s;
-  }
+  .btn-register { padding: 7px 18px; border-radius: 7px; border: none; background: var(--primary); color: #fff; font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; transition: background .2s; }
   .btn-register:hover { background: var(--dark); }
-  .btn-login {
-    padding: 7px 18px; border-radius: 7px;
-    border: 1.5px solid var(--border); background: var(--white);
-    color: var(--text); font-size: 0.8rem; font-weight: 600;
-    font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none;
-    transition: background .2s;
-  }
+  .btn-login { padding: 7px 18px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; transition: background .2s; }
   .btn-login:hover { background: #e9f5e9; }
 
-  /* ════════════════════════
-     SUCCESS CONTENT
-  ════════════════════════ */
+  /* ════ SUCCESS SECTION ════ */
   .success-wrap {
-    max-width: 500px; margin: 0 auto;
-    padding: 36px 24px 64px;
     display: flex; flex-direction: column; align-items: center;
+    justify-content: center;
+    padding: 60px 24px 80px;
+    text-align: center;
   }
 
-  /* success image banner */
-  .success-banner {
-    width: 100%; border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    margin-bottom: 32px;
-    background: linear-gradient(160deg, #3a4a52 0%, #2c3a40 40%, #1e2c32 100%);
-    display: flex; align-items: center; justify-content: center;
-    min-height: 210px; position: relative;
-  }
-
-  /* animated checkmark */
-  .check-circle {
-    width: 110px; height: 110px;
-    position: relative; display: flex; align-items: center; justify-content: center;
-  }
-  .check-svg {
-    width: 110px; height: 110px;
-  }
-  .check-bg {
-    fill: none; stroke: rgba(255,255,255,0.08);
-    stroke-width: 4;
-  }
+  /* ── Animated checkmark ── */
   .check-ring {
-    fill: none; stroke: rgba(255,255,255,0.18);
-    stroke-width: 2.5;
-    stroke-dasharray: 314;
-    stroke-dashoffset: 314;
-    animation: ringDraw 0.8s ease forwards 0.2s;
+    width: 100px; height: 100px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .check-ring svg { width: 100%; height: 100%; }
+
+  /* Ring draw animation */
+  .ring-circle {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 4;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    stroke-linecap: round;
     transform-origin: center;
     transform: rotate(-90deg);
+    animation: drawRing 0.6s ease-out 0.1s forwards;
   }
-  .check-mark {
-    fill: none; stroke: #ffffff;
-    stroke-width: 7; stroke-linecap: round; stroke-linejoin: round;
-    stroke-dasharray: 80;
-    stroke-dashoffset: 80;
-    animation: checkDraw 0.5s ease forwards 0.7s;
-  }
-  @keyframes ringDraw {
-    to { stroke-dashoffset: 0; }
-  }
-  @keyframes checkDraw {
+  @keyframes drawRing {
     to { stroke-dashoffset: 0; }
   }
 
-  /* subtle glow behind check */
-  .success-banner::before {
-    content: ''; position: absolute;
-    width: 160px; height: 160px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  /* Checkmark draw animation */
+  .check-path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 4.5;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: drawCheck 0.4s ease-out 0.75s forwards;
+  }
+  @keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
   }
 
-  /* text */
+  /* ── Text content ── */
   .success-title {
-    font-size: 1.25rem; font-weight: 800; color: var(--text);
-    text-align: center; margin-bottom: 10px;
+    font-size: 1.55rem; font-weight: 800; color: var(--dark);
+    margin-bottom: 8px;
   }
   .success-sub {
-    font-size: 0.85rem; color: var(--muted);
-    text-align: center; line-height: 1.6; margin-bottom: 10px;
-  }
-  .success-note {
-    font-size: 0.82rem; font-weight: 600; color: var(--primary);
-    text-align: center;
+    font-size: 0.9rem; color: var(--muted);
+    margin-bottom: 28px; max-width: 340px; line-height: 1.55;
   }
 
-  /* countdown bar */
-  .redirect-bar {
-    width: 100%; margin-top: 28px;
+  /* ── Info pills ── */
+  .info-pills {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 36px;
+  }
+  .pill {
+    display: flex; align-items: center; gap: 7px;
     background: var(--white); border: 1px solid var(--border);
-    border-radius: 8px; padding: 12px 16px;
-    text-align: center;
+    border-radius: 30px; padding: 8px 16px;
+    font-size: 0.82rem; font-weight: 600; color: var(--dark);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
   }
-  .redirect-text { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
-  .redirect-text span { font-weight: 700; color: var(--dark); }
-  .progress-track {
-    width: 100%; height: 4px;
-    background: var(--border); border-radius: 4px; overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%; width: 100%;
-    background: var(--primary); border-radius: 4px;
-    animation: shrink 3s linear forwards;
-    transform-origin: left;
-  }
-  @keyframes shrink {
-    from { width: 100%; }
-    to   { width: 0%; }
-  }
+  .pill svg { width: 14px; height: 14px; stroke: var(--primary); fill: none; stroke-width: 2; }
+  .pill.green { background: #e8f5e9; border-color: rgba(46,125,50,0.2); }
 
-  /* ════════════════════════
-     FOOTER
-  ════════════════════════ */
+  /* ── Countdown bar ── */
+  .redirect-wrap {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px;
+    width: 100%; max-width: 360px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    margin-bottom: 28px;
+  }
+  .redirect-text {
+    font-size: 0.8rem; color: var(--muted); margin-bottom: 10px;
+  }
+  .progress-track {
+    width: 100%; height: 6px;
+    background: var(--border); border-radius: 6px; overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%; width: 100%;
+    background: var(--primary); border-radius: 6px;
+    animation: shrink 3s linear forwards;
+  }
+  @keyframes shrink { to { width: 0%; } }
+
+  /* ── Buttons ── */
+  .action-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+  .btn-home {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 11px 24px; border-radius: 8px;
+    background: var(--primary); color: #fff;
+    font-size: 0.875rem; font-weight: 600; font-family: 'Inter', sans-serif;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background .2s, transform .15s;
+  }
+  .btn-home:hover { background: var(--dark); transform: translateY(-1px); }
+  .btn-home svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2; }
+
+  .btn-equip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 11px 24px; border-radius: 8px;
+    background: var(--white); color: var(--text);
+    font-size: 0.875rem; font-weight: 600; font-family: 'Inter', sans-serif;
+    text-decoration: none; border: 1.5px solid var(--border); cursor: pointer;
+    transition: background .2s, border-color .2s;
+  }
+  .btn-equip:hover { background: var(--light); border-color: var(--primary); }
+  .btn-equip svg { width: 15px; height: 15px; stroke: var(--text); fill: none; stroke-width: 2; }
+
+  /* ════ FOOTER ════ */
   footer { background: var(--dark); padding: 44px 40px 0; }
   .footer-grid { max-width: 1020px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 40px; }
   .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
@@ -176,6 +183,51 @@
   .contact-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 0.82rem; color: rgba(255,255,255,.75); }
   .contact-row svg { width: 14px; height: 14px; stroke: rgba(255,255,255,.65); fill: none; stroke-width: 1.8; flex-shrink: 0; margin-top: 2px; }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,.14); max-width: 1020px; margin: 0 auto; padding: 16px 0; font-size: 0.78rem; color: rgba(255,255,255,.45); }
+
+  /* ══════════════════════════════════════
+     TABLET  ≤ 768px
+  ══════════════════════════════════════ */
+  @media (max-width: 768px) {
+    nav { height: auto; padding: 12px 20px; flex-wrap: wrap; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; gap: 0; width: 100%; order: 3; background: var(--light); border-top: 1px solid rgba(0,0,0,0.07); margin-top: 10px; }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a  { display: block; padding: 11px 4px; font-size: 0.88rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .nav-btns { gap: 6px; }
+    .btn-register, .btn-login { padding: 6px 14px; font-size: 0.78rem; }
+
+    .success-wrap { padding: 48px 20px 64px; }
+    footer { padding: 32px 20px 0; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 28px; }
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
+  }
+
+  /* ══════════════════════════════════════
+     MOBILE  ≤ 480px
+  ══════════════════════════════════════ */
+  @media (max-width: 480px) {
+    nav { padding: 10px 16px; }
+    .nav-logo-text { font-size: 0.9rem; }
+    .btn-register, .btn-login { padding: 6px 12px; font-size: 0.75rem; }
+
+    .success-wrap { padding: 36px 16px 52px; }
+    .check-ring { width: 84px; height: 84px; margin-bottom: 22px; }
+    .success-title { font-size: 1.25rem; }
+    .success-sub   { font-size: 0.83rem; }
+
+    .info-pills { gap: 8px; }
+    .pill { font-size: 0.76rem; padding: 7px 12px; }
+
+    .redirect-wrap { max-width: 100%; }
+
+    .action-btns { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; max-width: 320px; }
+    .btn-home, .btn-equip { justify-content: center; width: 100%; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .footer-grid > div:first-child { grid-column: auto; }
+    .footer-bottom { text-align: center; font-size: 0.72rem; }
+  }
 </style>
 </head>
 <body>
@@ -188,7 +240,12 @@
     </div>
     <span class="nav-logo-text">AgroRent</span>
   </a>
-  <ul class="nav-links">
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
     <li><a href="home page.html">Home</a></li>
     <li><a href="equipment.html">Equipment Rental</a></li>
     <li><a href="tractor.html">Tractor Booking</a></li>
@@ -196,39 +253,61 @@
     <li><a href="about.html">About Us</a></li>
     <li><a href="contact.html">Contact Us</a></li>
   </ul>
+
   <div class="nav-btns">
     <a href="register.html" class="btn-register">Register</a>
-    <a href="loin.html"    class="btn-login">Log In</a>
+    <a href="loin.html"     class="btn-login">Log In</a>
   </div>
 </nav>
 
-<!-- ════ SUCCESS CONTENT ════ -->
+<!-- ════ SUCCESS ════ -->
 <div class="success-wrap">
 
-  <!-- BANNER WITH ANIMATED CHECKMARK -->
-  <div class="success-banner">
-    <div class="check-circle">
-      <svg class="check-svg" viewBox="0 0 100 100">
-        <!-- outer ring -->
-        <circle class="check-bg"   cx="50" cy="50" r="46"/>
-        <circle class="check-ring" cx="50" cy="50" r="46"/>
-        <!-- checkmark path -->
-        <polyline class="check-mark" points="22,52 40,70 78,32"/>
-      </svg>
+  <!-- Animated checkmark -->
+  <div class="check-ring">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle class="ring-circle" cx="50" cy="50" r="45"/>
+      <polyline class="check-path" points="28,52 43,67 72,36"/>
+    </svg>
+  </div>
+
+  <div class="success-title">Payment Successful!</div>
+  <p class="success-sub">Your booking has been confirmed. The equipment will be delivered to you on the scheduled date.</p>
+
+  <!-- Info pills -->
+  <div class="info-pills">
+    <div class="pill green">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      Booking Confirmed
+    </div>
+    <div class="pill green">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      No Fine Due
+    </div>
+    <div class="pill">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Delivery Scheduled
     </div>
   </div>
 
-  <!-- MESSAGE -->
-  <h1 class="success-title">Book Returned Successfully</h1>
-  <p class="success-sub">Thank you for returning the book. Your library records have been updated.</p>
-  <p class="success-note">No fine due</p>
-
-  <!-- COUNTDOWN -->
-  <div class="redirect-bar">
-    <div class="redirect-text">Redirecting to home in <span id="countdown">3</span>s…</div>
+  <!-- Countdown redirect -->
+  <div class="redirect-wrap">
+    <div class="redirect-text" id="countdownText">Redirecting to home in <strong>3s</strong>…</div>
     <div class="progress-track">
-      <div class="progress-fill"></div>
+      <div class="progress-bar" id="progressBar"></div>
     </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="action-btns">
+    <a href="home page.html" class="btn-home">
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg>
+      Go to Home
+    </a>
+    <a href="equipment.html" class="btn-equip">
+      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      Browse Equipment
+    </a>
   </div>
 
 </div>
@@ -272,17 +351,34 @@
   <div class="footer-bottom">© 2025 AgroRent. All rights reserved</div>
 </footer>
 
+<!-- ════ JS ════ -->
 <script>
-  // Countdown + redirect
-  let secs = 3;
-  const el = document.getElementById('countdown');
+  /* ── Hamburger ── */
+  var btn   = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+  btn.addEventListener('click', function () {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
 
-  const timer = setInterval(() => {
+  /* ── Countdown redirect ── */
+  var secs = 3;
+  var textEl = document.getElementById('countdownText');
+
+  var timer = setInterval(function () {
     secs--;
-    el.textContent = secs;
     if (secs <= 0) {
       clearInterval(timer);
+      textEl.innerHTML = 'Redirecting now…';
       window.location.href = 'home page.html';
+    } else {
+      textEl.innerHTML = 'Redirecting to home in <strong>' + secs + 's</strong>…';
     }
   }, 1000);
 </script>
