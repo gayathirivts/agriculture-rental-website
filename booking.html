@@ -19,9 +19,7 @@
   }
   html, body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
 
-  /* ════════════════════════
-     NAVBAR
-  ════════════════════════ */
+  /* ════ NAVBAR ════ */
   nav {
     position: sticky; top: 0; z-index: 999;
     background: var(--light); height: 52px;
@@ -29,166 +27,87 @@
     padding: 0 40px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.08);
   }
-  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); }
+  .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); flex-shrink: 0; }
   .nav-logo-box { width: 30px; height: 30px; background: var(--dark); border-radius: 7px; display: flex; align-items: center; justify-content: center; }
   .nav-logo-box svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
   .nav-logo-text { font-size: 0.95rem; font-weight: 700; }
+
+  /* Hamburger */
+  .hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; margin-left: auto; z-index: 1001; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a { font-size: 0.8rem; font-weight: 500; color: var(--text); text-decoration: none; transition: color .2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--dark); }
+
   .nav-btns { display: flex; gap: 8px; }
   .btn-register { padding: 7px 18px; border-radius: 7px; border: none; background: var(--primary); color: #fff; font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; transition: background .2s; }
   .btn-register:hover { background: var(--dark); }
   .btn-login { padding: 7px 18px; border-radius: 7px; border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-size: 0.8rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; transition: background .2s; }
   .btn-login:hover { background: #e9f5e9; }
 
-  /* ════════════════════════
-     PAGE
-  ════════════════════════ */
+  /* ════ PAGE ════ */
   .page { max-width: 1020px; margin: 0 auto; padding: 24px 24px 64px; }
 
-  /* BACK BUTTON */
-  .btn-back {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 18px; border-radius: 8px;
-    border: 1.5px solid var(--border); background: var(--white);
-    color: var(--text); font-size: 0.82rem; font-weight: 600;
-    font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none;
-    transition: background .2s, border-color .2s;
-    margin-bottom: 32px;
-  }
+  .btn-back { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--white); color: var(--text); font-size: 0.82rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; transition: background .2s, border-color .2s; margin-bottom: 32px; }
   .btn-back svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; }
   .btn-back:hover { background: var(--light); border-color: var(--primary); }
 
-  /* ════════════════════════
-     TWO-COLUMN LAYOUT
-  ════════════════════════ */
-  .booking-layout {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 40px;
-    align-items: start;
-  }
+  /* ════ TWO-COLUMN LAYOUT ════ */
+  .booking-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
 
-  /* ════════════════════════
-     LEFT — BOOKING DETAILS
-  ════════════════════════ */
-  .section-title {
-    font-size: 1.3rem; font-weight: 800; color: var(--dark);
-    margin-bottom: 20px;
-  }
+  /* ════ LEFT ════ */
+  .section-title { font-size: 1.3rem; font-weight: 800; color: var(--dark); margin-bottom: 20px; }
 
-  /* product card */
-  .product-card {
-    background: var(--light); border-radius: 8px; padding: 16px 18px;
-    margin-bottom: 24px;
-    border: 1px solid rgba(46,125,50,0.15);
-  }
+  .product-card { background: var(--light); border-radius: 8px; padding: 16px 18px; margin-bottom: 24px; border: 1px solid rgba(46,125,50,0.15); }
   .product-card-name { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
   .product-card-price { display: flex; align-items: baseline; gap: 5px; }
   .product-card-price .amount { font-size: 1.15rem; font-weight: 800; color: var(--dark); }
   .product-card-price .per    { font-size: 0.78rem; color: var(--dark); opacity: .7; font-weight: 400; }
 
-  /* form */
   .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block; font-size: 0.8rem; font-weight: 600;
-    color: var(--text); margin-bottom: 6px;
-  }
-  .form-group input {
-    width: 100%; padding: 11px 14px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-size: 0.875rem; font-family: 'Inter', sans-serif;
-    background: var(--white); color: var(--text); outline: none;
-    transition: border-color .2s, box-shadow .2s;
-  }
-  .form-group input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(77,153,77,0.12);
-  }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .form-group input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.875rem; font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); outline: none; transition: border-color .2s, box-shadow .2s; }
+  .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(77,153,77,0.12); }
   .form-group input::placeholder { color: #b0b8c4; font-size: 0.8rem; }
   .form-hint { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
 
-  /* date input icon style */
   .date-wrap { position: relative; }
-  .date-wrap svg {
-    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-    width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 1.8;
-    pointer-events: none;
-  }
+  .date-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 1.8; pointer-events: none; }
   .date-wrap input { padding-left: 36px; }
 
-  /* ════════════════════════
-     RIGHT — PRICE SUMMARY
-  ════════════════════════ */
-  .summary-panel {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 12px; padding: 24px 22px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  }
-  .summary-title {
-    font-size: 1.3rem; font-weight: 800; color: var(--dark);
-    margin-bottom: 22px; text-align: center;
-  }
+  /* ════ RIGHT — SUMMARY ════ */
+  .summary-panel { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px 22px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+  .summary-title { font-size: 1.3rem; font-weight: 800; color: var(--dark); margin-bottom: 22px; text-align: center; }
 
-  /* row items */
-  .summary-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .summary-row:last-of-type { border-bottom: none; }
   .summary-row .label { font-size: 0.85rem; color: var(--text); font-weight: 500; }
   .summary-row .value { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
 
-  /* total amount */
-  .total-block {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 0 16px;
-    border-top: 1.5px solid var(--border);
-    margin-top: 2px;
-  }
-  .total-block .label { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .total-block { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 16px; border-top: 1.5px solid var(--border); margin-top: 2px; }
+  .total-block .label     { font-size: 0.95rem; font-weight: 700; color: var(--text); }
   .total-block .total-val { font-size: 1.6rem; font-weight: 800; color: var(--dark); }
 
-  /* advance card */
-  .advance-card {
-    background: var(--light); border-radius: 8px; padding: 14px 16px;
-    margin-bottom: 14px; border: 1px solid rgba(46,125,50,0.15);
-  }
-  .advance-top {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 4px;
-  }
+  .advance-card { background: var(--light); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; border: 1px solid rgba(46,125,50,0.15); }
+  .advance-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
   .advance-top .a-label { font-size: 0.85rem; font-weight: 700; color: var(--dark); }
   .advance-top .a-val   { font-size: 0.85rem; font-weight: 700; color: var(--dark); }
   .advance-sub { font-size: 0.75rem; color: var(--dark); opacity: .75; }
 
-  /* remaining */
   .remaining-block { margin-bottom: 20px; }
-  .remaining-top {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 3px;
-  }
+  .remaining-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
   .remaining-top .r-label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
   .remaining-top .r-val   { font-size: 0.85rem; font-weight: 600; color: var(--text); }
   .remaining-sub { font-size: 0.72rem; color: var(--muted); }
 
-  /* proceed button */
-  .btn-pay {
-    display: block; width: 100%; height: 46px;
-    background: var(--primary); color: #fff;
-    border: none; border-radius: 8px;
-    font-size: 0.9rem; font-weight: 600; font-family: 'Inter', sans-serif;
-    cursor: pointer; text-decoration: none;
-    display: flex; align-items: center; justify-content: center;
-    transition: background .2s, transform .15s;
-  }
+  .btn-pay { display: flex; width: 100%; height: 46px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; font-family: 'Inter', sans-serif; cursor: pointer; text-decoration: none; align-items: center; justify-content: center; transition: background .2s, transform .15s; }
   .btn-pay:hover { background: var(--dark); transform: translateY(-1px); }
 
-  /* ════════════════════════
-     FOOTER
-  ════════════════════════ */
+  /* ════ FOOTER ════ */
   footer { background: var(--dark); padding: 44px 40px 0; }
   .footer-grid { max-width: 1020px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 40px; }
   .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
@@ -203,6 +122,57 @@
   .contact-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; font-size: 0.82rem; color: rgba(255,255,255,.75); }
   .contact-row svg { width: 14px; height: 14px; stroke: rgba(255,255,255,.65); fill: none; stroke-width: 1.8; flex-shrink: 0; margin-top: 2px; }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,.14); max-width: 1020px; margin: 0 auto; padding: 16px 0; font-size: 0.78rem; color: rgba(255,255,255,.45); }
+
+  /* ══════════════════════════════════════
+     TABLET  ≤ 768px
+  ══════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    nav { height: auto; padding: 12px 20px; flex-wrap: wrap; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; flex-direction: column; gap: 0; width: 100%; order: 3; background: var(--light); border-top: 1px solid rgba(0,0,0,0.07); margin-top: 10px; }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 11px 4px; font-size: 0.88rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .nav-btns { gap: 6px; }
+    .btn-register, .btn-login { padding: 6px 14px; font-size: 0.78rem; }
+
+    .page { padding: 18px 16px 48px; }
+
+    /* Stack vertically — form first, summary below */
+    .booking-layout { grid-template-columns: 1fr; gap: 24px; }
+    .booking-left  { order: 1; }
+    .summary-panel { order: 2; }
+
+    .section-title { font-size: 1.15rem; }
+    .summary-title { font-size: 1.15rem; }
+
+    footer { padding: 32px 20px 0; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 28px; }
+    .footer-grid > div:first-child { grid-column: 1 / -1; }
+  }
+
+  /* ══════════════════════════════════════
+     MOBILE  ≤ 480px
+  ══════════════════════════════════════ */
+  @media (max-width: 480px) {
+
+    nav { padding: 10px 16px; }
+    .nav-logo-text { font-size: 0.9rem; }
+    .btn-register, .btn-login { padding: 6px 12px; font-size: 0.75rem; }
+
+    .page { padding: 14px 12px 40px; }
+    .btn-back { padding: 7px 14px; font-size: 0.78rem; margin-bottom: 20px; }
+
+    .section-title { font-size: 1.05rem; margin-bottom: 16px; }
+    .product-card  { padding: 14px 14px; margin-bottom: 18px; }
+    .total-block .total-val { font-size: 1.35rem; }
+    .btn-pay { font-size: 0.85rem; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+    .footer-grid > div:first-child { grid-column: auto; }
+    .footer-bottom { text-align: center; font-size: 0.72rem; }
+  }
 </style>
 </head>
 <body>
@@ -215,7 +185,12 @@
     </div>
     <span class="nav-logo-text">AgroRent</span>
   </a>
-  <ul class="nav-links">
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
     <li><a href="home page.html">Home</a></li>
     <li><a href="equipment.html" class="active">Equipment Rental</a></li>
     <li><a href="tractor.html">Tractor Booking</a></li>
@@ -223,29 +198,27 @@
     <li><a href="about.html">About Us</a></li>
     <li><a href="contact.html">Contact Us</a></li>
   </ul>
+
   <div class="nav-btns">
     <a href="register.html" class="btn-register">Register</a>
-    <a href="loin.html"    class="btn-login">Log In</a>
+    <a href="loin.html"     class="btn-login">Log In</a>
   </div>
 </nav>
 
 <!-- ════ PAGE ════ -->
 <div class="page">
 
-  <!-- BACK -->
-  <a href="equipment.html" class="btn-back">
+  <a href="equipment detail page.html" class="btn-back">
     <svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 5 5 12 12 19"/></svg>
     Back to Listing
   </a>
 
-  <!-- TWO COLUMN -->
   <div class="booking-layout">
 
-    <!-- ── LEFT: BOOKING DETAILS ── -->
+    <!-- LEFT -->
     <div class="booking-left">
       <div class="section-title">Booking Details</div>
 
-      <!-- Product card -->
       <div class="product-card">
         <div class="product-card-name">Hand Sickle</div>
         <div class="product-card-price">
@@ -254,16 +227,14 @@
         </div>
       </div>
 
-      <!-- Form -->
       <div class="form-group">
         <label>Number Of Count</label>
-        <input type="number" id="countInput" min="1" value="1" placeholder="Enter the number of you need" oninput="updateSummary()"/>
-        <div class="form-hint"></div>
+        <input type="number" id="countInput" min="1" value="1" placeholder="Enter the number you need" oninput="updateSummary()"/>
       </div>
 
       <div class="form-group">
         <label>Number Of Days</label>
-        <input type="number" id="daysInput" min="1" value="1" placeholder="How many days will you need the equipment?" oninput="updateSummary()"/>
+        <input type="number" id="daysInput" min="1" value="1" placeholder="How many days do you need the equipment?" oninput="updateSummary()"/>
         <div class="form-hint">How many days will you need the equipment?</div>
       </div>
 
@@ -271,12 +242,12 @@
         <label>Start Date</label>
         <div class="date-wrap">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          <input type="date" id="startDate" placeholder="Select Date"/>
+          <input type="date" id="startDate"/>
         </div>
       </div>
     </div>
 
-    <!-- ── RIGHT: PRICE SUMMARY ── -->
+    <!-- RIGHT -->
     <div class="summary-panel">
       <div class="summary-title">Price Summary</div>
 
@@ -298,7 +269,6 @@
         <span class="total-val" id="sumTotal">₹50</span>
       </div>
 
-      <!-- Advance -->
       <div class="advance-card">
         <div class="advance-top">
           <span class="a-label">Advance (30%)</span>
@@ -307,7 +277,6 @@
         <div class="advance-sub">Pay now to confirm booking</div>
       </div>
 
-      <!-- Remaining -->
       <div class="remaining-block">
         <div class="remaining-top">
           <span class="r-label">Remaining Amount</span>
@@ -316,7 +285,6 @@
         <div class="remaining-sub">Pay remaining amount after service completion</div>
       </div>
 
-      <!-- Proceed button -->
       <a href="payment page.html" class="btn-pay">Proceed to Payment</a>
     </div>
 
@@ -363,16 +331,29 @@
 </footer>
 
 <script>
-  const RATE = 50;
+  /* ── Hamburger ── */
+  var btn   = document.getElementById('hamburger');
+  var links = document.getElementById('navLinks');
+  btn.addEventListener('click', function () {
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+
+  /* ── Price Calculator ── */
+  var RATE = 50;
 
   function updateSummary() {
-    const count = Math.max(1, parseInt(document.getElementById('countInput').value) || 1);
-    const days  = Math.max(1, parseInt(document.getElementById('daysInput').value)  || 1);
-
-    const total     = RATE * count * days;
-    const advance   = Math.round(total * 0.30);
-    const remaining = total - advance;
-
+    var count = Math.max(1, parseInt(document.getElementById('countInput').value) || 1);
+    var days  = Math.max(1, parseInt(document.getElementById('daysInput').value)  || 1);
+    var total     = RATE * count * days;
+    var advance   = Math.round(total * 0.30);
+    var remaining = total - advance;
     document.getElementById('sumCount').textContent     = count;
     document.getElementById('sumDays').textContent      = days;
     document.getElementById('sumTotal').textContent     = '₹' + total;
@@ -380,7 +361,6 @@
     document.getElementById('sumRemaining').textContent = '₹' + remaining;
   }
 
-  // Init
   updateSummary();
 </script>
 
